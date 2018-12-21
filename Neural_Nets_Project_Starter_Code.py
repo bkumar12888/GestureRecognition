@@ -42,6 +42,19 @@ batch_size = 50
 # This is one of the most important part of the code. The overall structure of the generator has been given. In the generator, you are going to preprocess the images as you have images of 2 different dimensions as well as create a batch of video frames. You have to experiment with `img_idx`, `y`,`z` and normalization such that you get high accuracy.
 
 # In[ ]:
+folder list is the .csv that would be passed so folder list would be train doc in case of training and val doc in case of validation. source path is the root directory where data is available img_idx is the index of images that we want to use. total images given is 30 but we might not want to use 30 images in traing process, reason if we want to extract 15 images out of 30 then we will have good info about sequences. here 30 images is very high which might use lot of memory usage and take more training information. se we need to sample indexes rather than using all images. so img_idx will be list of image that we want to use instead of 0 to 30.
+
+np.random.permutation(folder_list) : is the random permutation of csv file . in csv file all the sequences are kept in the order all the sequences belonging to class 0 are at the top of the CSV file , all the sequences are belonging to calss 1 is next and so on. so such kind of network biases the network while training, so we need to shuffle the traing data so that it does not have all the sequences belonging to particular in order. after shuffling random order of data will be fetched and being fed into the network
+
+lets consider you have decided the batch size is 10 sequences long so num_batches will be: no of sequenes/ batch size ( note that one sequence is one video)
+
+if batch size is 10 and no of sequenes is 100, if you grab 10 batches of data means actually grabbing 100 sequences
+
+if we have 58 video and batch size is 5 then num_batch will be 12 not 11 but with 11 grab of images we can see only 55 video sequences.there will be always three sequences will be left over. need to write code which will complete the one pass over the training data.
+
+batch_data = np.zeros((batch_size,x,y,z,3)) : create some emplty container x is the number of images you use for each video : it means of img_idx list lenght is 10 then x will become 10. (y,z) is the final size of the input images and 3 is the number of channels RGB y and z height and width of the image.
+
+batch_labels = np.zeros((batch_size,5)) : one hot encoding representation; if video sequence belongs to 1 then in one hot vector zeroth value will be 1.
 
 
 def generator(source_path, folder_list, batch_size):
