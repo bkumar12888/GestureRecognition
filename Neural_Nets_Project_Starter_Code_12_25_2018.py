@@ -46,7 +46,7 @@ batch_size = 5
 
 def generator(source_path, folder_list, batch_size):
     print( 'Source path = ', source_path, '; batch size =', batch_size)
-    img_idx = [0,2,4]
+    img_idx = [0,1,2,4,7,10,14,18,22,27,28,29]
 #create a list of image numbers you want to use for a particular video
     while True:
         t = np.random.permutation(folder_list)
