@@ -1,0 +1,8 @@
+LSTM : categorical_accuracy: 0.6875 val_categorical_accuracy: 0.6875 (with 30 epoch)
+
+GRU: categorical_accuracy: 0.8210  val_categorical_accuracy: 0.7578 (with 45 epoch)
+
+GRU and bidirectional
+categorical_accuracy: 0.9345  val_categorical_accuracy: 0.8203 (with 60 epoch)
+
+GRU + bidirectional (with changed generator function):
